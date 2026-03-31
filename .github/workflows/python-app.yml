@@ -2,7 +2,7 @@ name: CI/CD Pipeline Marketing Vinhos
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "main", "feature/analise-vinhos", "feature/testes-e-alertas" ]
   pull_request:
     branches: [ "main" ]
 
@@ -11,14 +11,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
+    
     - name: Set up Python 3.10
       uses: actions/setup-python@v3
       with:
         python-version: "3.10"
+        
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
+        
     - name: Run tests with pytest
       run: |
         pytest test_analise.py
@@ -28,5 +31,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
+    
     - name: Mock Deployment
-      run: echo "Deploy da aplicacao de analise de marketing realizado com sucesso no ambiente de producao!"
+      run: echo "Deploy realizado!"
+
+    - name: Discord notification
+      if: always()
+      uses: Ilshidur/action-discord@master
+      env:
+        DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+      with:
+        args: 'O arquivo foi executado com sucesso!'
