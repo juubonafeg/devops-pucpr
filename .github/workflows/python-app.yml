@@ -2,7 +2,7 @@ name: CI/CD Pipeline Marketing Vinhos
 
 on:
   push:
-    branches: [ "main", "feature/analise-vinhos" ]
+    branches: [ "main", "feature/analise-vinhos", "feature/cicd-pipeline" ]
   pull_request:
     branches: [ "main" ]
 
