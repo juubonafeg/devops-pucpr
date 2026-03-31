@@ -39,7 +39,6 @@ jobs:
       if: always()
       uses: rjstone/discord-webhook-action@v2
       with:
-        webhookUrl: ${{ https://discord.com/api/webhooks/1488379014954356736/C1eVJk1b-F3tJay7X79M9cqXuzpsd1fkzfCZv19OZNsK7H4vgYqDjZQkYXfmtbKnRq41 }}
+        webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
         severity: info
-        details: "O arquivo foi executado com sucesso"
-        description: "Status final do processo: ${{ job.status }}"
+        details: "O arquivo foi executado com sucesso!"
