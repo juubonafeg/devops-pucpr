@@ -30,3 +30,11 @@ jobs:
     - uses: actions/checkout@v3
     - name: Mock Deployment
       run: echo "Deploy da aplicacao de analise de marketing realizado com sucesso no ambiente de producao!"
+
+      - name: Discord notification
+      uses: rjstone/discord-webhook-notify@v1
+      if: always()
+      with:
+        severity: info
+        details: 'O Pipeline de Marketing da Júlia finalizou com sucesso!'
+        webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
